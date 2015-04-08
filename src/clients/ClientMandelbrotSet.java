@@ -6,8 +6,15 @@ import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import api.Computer;
+import computer.ComputerImpl;
 import tasks.TaskMandelbrotSet;
 
 /**
@@ -29,20 +36,20 @@ public class ClientMandelbrotSet extends Client<Integer[][]>
                                                        ITERATION_LIMIT) ); 
     }
     
-    /**
-     * Run the MandelbrotSet visualizer client.
-     * @param args unused 
-     * @throws java.rmi.RemoteException 
-     */
     public static void main( String[] args ) throws Exception
     {  
         System.setSecurityManager( new SecurityManager() );
         final ClientMandelbrotSet client = new ClientMandelbrotSet();
+
         client.begin();
         Integer[][] value = client.runTask();
         client.add( client.getLabel( value ) );
         client.end();
     }
+    
+    
+    
+
     
     public JLabel getLabel( Integer[][] counts )
     {

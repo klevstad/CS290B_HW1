@@ -2,14 +2,18 @@ package clients;
 import api.Computer;
 import api.Task;
 import computer.ComputerImpl;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -22,9 +26,9 @@ import javax.swing.JScrollPane;
 public class Client<T> extends JFrame
 {
     final protected Task<T> task;
-          final private Computer computer;
-                protected T taskReturnValue;
-                private long clientStartTime;
+    final private Computer computer;
+    protected T taskReturnValue;
+    private long clientStartTime;
     
     public Client( final String title, final String domainName, final Task<T> task ) 
             throws RemoteException, NotBoundException, MalformedURLException

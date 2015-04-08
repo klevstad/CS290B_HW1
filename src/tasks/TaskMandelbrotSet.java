@@ -2,8 +2,8 @@ package tasks;
 
 import api.Task;
 
-public final class TaskMandelbrotSet implements Task{
-	
+public final class TaskMandelbrotSet implements Task
+{
 	private double _lowerLeftX;
 	private double _lowerLeftY;
 	private double _edgeLength;
@@ -48,6 +48,7 @@ public final class TaskMandelbrotSet implements Task{
 		}
 		
 		return count;
+		//return null;
 	}
 	
 	// Find the absolute value of the real and imaginary part of a complex number	

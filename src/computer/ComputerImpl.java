@@ -24,14 +24,11 @@ public class ComputerImpl implements api.Computer{
 	        System.setSecurityManager(new SecurityManager());
 	    }
 	    try {
-	        String name = "Computer";
-	        Computer engine = new ComputerImpl();
-	        Computer stub =
-	            (Computer) UnicastRemoteObject.exportObject(engine, 0);
-	        //Registry registry = LocateRegistry.getRegistry();
-	        Registry registry = LocateRegistry.createRegistry( 1099 );
+	        Computer computer = new ComputerImpl();
+	        Computer stub = (Computer) UnicastRemoteObject.exportObject(computer, 0);
+	        Registry registry = LocateRegistry.createRegistry( PORT );
 
-	        registry.rebind(name, stub);
+	        registry.rebind(SERVICE_NAME, stub);
 	        System.out.println("ComputerImpl bound");
 	    } catch (Exception e) {
 	        System.err.println("ComputerImpl exception:");
