@@ -47,6 +47,8 @@ public class ClientEuclideanTsp extends Client<List<Integer>>
         final List<Integer> value = client.runTask();
         client.add( client.getLabel( value.toArray( new Integer[0] ) ) );
         client.end();
+       
+        
     }
     
     public JLabel getLabel( final Integer[] tour )
