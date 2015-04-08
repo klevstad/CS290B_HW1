@@ -32,12 +32,12 @@ public final class TaskMandelbrotSet implements Task, Serializable
 		double step = get_edgeLength() / get_nSquares(); // Ninjatriks.
 		
 		for (int i = 0; i < get_nSquares(); i++) {
-            for (int j = 0; j < get_nSquares(); j++) {
-                count[j][i] = computeZK(c_x, c_y);
-                c_x += step; // moves right for the next computation
-		    }
-            c_y += step; // moves down for the next row
-            c_x = root_x; // places the x at the beginning of the row
+			for (int j = 0; j < get_nSquares(); j++) {
+            	count[j][i] = computeZK(c_x, c_y);
+            	c_x += step; // moves right for the next computation
+			}
+			c_y += step; // moves down for the next row
+			c_x = root_x; // places the x at the beginning of the row
 		}
 		
 		return count;
@@ -54,11 +54,11 @@ public final class TaskMandelbrotSet implements Task, Serializable
         while ((x * x + y * y < 4) && iteration < get_iterationLimit() )
         {
         	// zK = (zK-1)^2 + c
-            double temp = Math.pow(x, 2) - Math.pow(y, 2) + c_x;
-            y = 2 * x * y + c_y;
-            x = temp;
+        	double temp = Math.pow(x, 2) - Math.pow(y, 2) + c_x;
+        	y = 2 * x * y + c_y;
+        	x = temp;
 
-            iteration++;
+        	iteration++;
         }
         return iteration;
     }
