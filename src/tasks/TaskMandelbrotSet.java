@@ -31,8 +31,10 @@ public final class TaskMandelbrotSet implements Task, Serializable
 		double root_x = c_x; // Stores the x coordinate to begin at the same position for every row
 		double step = get_edgeLength() / get_nSquares(); // Ninjatriks.
 		
-		for (int i = 0; i < get_nSquares(); i++) {
-			for (int j = 0; j < get_nSquares(); j++) {
+		for (int i = 0; i < get_nSquares(); i++)
+		{
+			for (int j = 0; j < get_nSquares(); j++)
+			{
             	count[j][i] = computeZK(c_x, c_y);
             	c_x += step; // moves right for the next computation
 			}
