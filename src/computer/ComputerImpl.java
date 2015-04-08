@@ -1,5 +1,6 @@
 package computer;
 
+import java.io.Serializable;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -7,7 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import api.Computer;
 import api.Task;
 
-public class ComputerImpl implements api.Computer{
+public class ComputerImpl implements api.Computer, Serializable{
 
 	public ComputerImpl()
 	{

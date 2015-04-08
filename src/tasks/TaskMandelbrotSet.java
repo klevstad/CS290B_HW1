@@ -1,8 +1,10 @@
 package tasks;
 
+import java.io.Serializable;
+
 import api.Task;
 
-public final class TaskMandelbrotSet implements Task
+public final class TaskMandelbrotSet implements Task, Serializable
 {
 	private double _lowerLeftX;
 	private double _lowerLeftY;

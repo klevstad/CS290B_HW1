@@ -47,10 +47,7 @@ public class ClientMandelbrotSet extends Client<Integer[][]>
         client.end();
     }
     
-    
-    
 
-    
     public JLabel getLabel( Integer[][] counts )
     {
         final Image image = new BufferedImage( N_PIXELS, N_PIXELS, BufferedImage.TYPE_INT_ARGB );
