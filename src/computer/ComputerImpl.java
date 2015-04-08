@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import api.Computer;
 import api.Task;
 
+@SuppressWarnings("serial")
 public class ComputerImpl implements api.Computer, Serializable{
 
 	public ComputerImpl()

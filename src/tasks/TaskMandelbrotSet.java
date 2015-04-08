@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import api.Task;
 
+@SuppressWarnings({ "serial", "rawtypes" })
 public final class TaskMandelbrotSet implements Task, Serializable
 {
 	private double _lowerLeftX;
@@ -21,51 +22,45 @@ public final class TaskMandelbrotSet implements Task, Serializable
 		set_iterationLimit(iterationLimit);
 	}
 
-	@Override
+	//@Override
 	public Integer[][] execute()
 	{
 		Integer[][] count = new Integer[get_nSquares()][get_nSquares()];
-		
-		// z0
-		double c_x = get_lowerLeftX(); 
-		double c_y = get_lowerLeftY();
-		
-		
-		double z0 = polarForm(c_x, c_y);
-		double zPrev = z0;
-		
+		double c_x = get_lowerLeftX(); // Get start x coordinate
+		double c_y = get_lowerLeftY(); // Get start y coordinate
+		double root_x = c_x; // Stores the x coordinate to begin at the same position for every row
+		double step = get_edgeLength() / get_nSquares(); // Ninjatriks.
 		
 		for (int i = 0; i < get_nSquares(); i++) {
             for (int j = 0; j < get_nSquares(); j++) {
-                double c_re = c_x - get_edgeLength() / 2 + get_edgeLength() * i / get_nSquares();
-                double c_im = c_y - get_edgeLength() / 2 + get_edgeLength() * j / get_nSquares();
-                
-                double zK = mand(zPrev, z0);
-                
-                zPrev = polarForm(c_re, c_im);
-                
-                count[i][j] = (int) zK;
-              
+                count[j][i] = computeZK(c_x, c_y);
+                c_x += step; // moves right for the next computation
 		    }
+            c_y += step; // moves down for the next row
+            c_x = root_x; // places the x at the beginning of the row
 		}
 		
 		return count;
-		//return null;
 	}
 	
-	// Find the absolute value of the real and imaginary part of a complex number	
-	public double polarForm(double real, double imaginary)
-	{
-		return Math.sqrt((Math.pow(real, 2) + Math.pow(imaginary, 2)));
-	}
 	
-    public int mand(double z, double z0) {
+    private int computeZK(double c_x, double c_y)
+    {
+        double x = 0;
+        double y = 0;
+        int iteration = 0;
+        
+        // Returns the largest of Zk > 2 and the iteration limit
+        while ((x * x + y * y < 4) && iteration < get_iterationLimit() )
+        {
+        	// zK = (zK-1)^2 + c
+            double temp = Math.pow(x, 2) - Math.pow(y, 2) + c_x;
+            y = 2 * x * y + c_y;
+            x = temp;
 
-        for (int t = 0; t < get_iterationLimit(); t++) {
-        	if (z < 2.0) { return t; }
-            z = z * z + z0;
+            iteration++;
         }
-        return get_iterationLimit();
+        return iteration;
     }
 	
 	public double get_lowerLeftX()
