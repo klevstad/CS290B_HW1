@@ -17,7 +17,7 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	}
 	
 	//can only take in unvisited cities
-	public int findClosest(double[][] cities, int current, List visited){
+	public int findClosest(double[][] cities, int current, List<Integer> visited){
 		int closest=0;
 		double dist=1000;
 		for (int i = 0; i < cities.length; i++) {
@@ -42,22 +42,15 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	}
 
 	public List<Integer> execute() {
-		List<Integer> visited = new ArrayList();
+		List<Integer> visited = new ArrayList<Integer>();
 		int [] path= new int[CITIES.length];
 
 		path[0]= 0;
 		visited.add(0);
 
 		for (int i = 1; i < CITIES.length; i++) {
-
 			path[i]= findClosest(CITIES, path[i-1],visited);
 			visited.add(path[i]);
-			System.out.println("hello");
-
-
-		}
-		for (int i = 0; i < path.length; i++) {
-			System.out.println(path[i]);
 		}
 		
 		List<Integer> returner = new ArrayList<Integer>();
@@ -79,51 +72,5 @@ public class TaskEuclideanTsp implements Task, Serializable {
 
 		return list;
 	}
-
-
-//
-//	
-//	public static void main(String[] args) {
-//		final double[][] CITIES = 
-//		    {
-//		        { 6, 3 },
-//		        { 2, 2 },
-//		        { 5, 8 },
-//		        { 1, 5 },
-//		        { 1, 6 },
-//		        { 2, 7 },
-//		        { 2, 8 },
-//		        { 6, 5 },
-//		        { 1, 3 },
-//		        { 6, 6 }
-//		    };
-//		
-//		
-//
-//		TaskEuclideanTsp t = new TaskEuclideanTsp(CITIES);
-//		List visited = new ArrayList();
-//		int[] path= new int[CITIES.length];
-//		//System.out.println(t.findClosest(CITIES, 0,visited));
-//
-//		path[0]= 0;
-//		visited.add(0);
-//
-//		for (int i = 1; i < CITIES.length; i++) {
-//
-//			path[i]= t.findClosest(CITIES, path[i-1],visited);
-//			visited.add(path[i]);
-//
-//
-//		}
-//
-//		for (int i = 0; i < path.length; i++) {
-//			System.out.println(path[i]);
-//		}
-//		
-//
-//
-//
-//		
-//		}
 
 }
