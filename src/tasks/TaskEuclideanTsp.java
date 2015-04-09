@@ -11,12 +11,24 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	//just for testing
 	double[][] CITIES;
 
+	/**
+	 * 
+	 * Takes initialises the object with the problem as parameter
+	 * @param cities The problem
+	 */
 
 	public TaskEuclideanTsp(double[][] cities) {
 		this.CITIES = cities;
 	}
 	
-	//can only take in unvisited cities
+	
+	/**
+	 * can only take in unvisited cities
+	 * @param cities List of all cities to visit
+	 * @param current the current city to move from
+	 * @param visited list of all cities that have been visited
+	 * @return the number that represents the closest city to move to
+	 */
 	public int findClosest(double[][] cities, int current, List<Integer> visited){
 		int closest=0;
 		double dist=1000;
@@ -33,6 +45,13 @@ public class TaskEuclideanTsp implements Task, Serializable {
 
 		return closest;
 	}
+	/**
+	 * Finds the euclidian distance between two cities. 
+	 * @param cities list of all cities 
+	 * @param from The first city to find the distance from
+	 * @param to The second city to find the distance to
+	 * @return A double that is the distance between the cities. 
+	 */
 
 	double getDistance(double[][] cities, int from, int to){
 
@@ -40,6 +59,13 @@ public class TaskEuclideanTsp implements Task, Serializable {
 		return dist;
 
 	}
+	/**
+	 * Runs the Tsp. 
+	 * Starts at city 0 and uses a greedy algorithm to find the closes city to it. 
+	 * It then chooses that city as next point and repeats through the whole list of cities. 
+	 * It adds each visited city to path.
+	 * Returner is just to make the returning object the expected type for the client
+	 */
 
 	public List<Integer> execute() {
 		List<Integer> visited = new ArrayList<Integer>();
@@ -61,16 +87,5 @@ public class TaskEuclideanTsp implements Task, Serializable {
 		return returner;
 	}
 
-
-	public int[] swap(int[] list, int from, int to){
-
-		int f = list[from];
-		int t = list[to];
-
-		list[from] = t;
-		list[to] = f;
-
-		return list;
-	}
 
 }
