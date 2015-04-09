@@ -1,7 +1,6 @@
 package clients;
 import api.Computer;
 import api.Task;
-import computer.ComputerImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -15,6 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
+import system.ComputerImpl;
 
 /**
  *

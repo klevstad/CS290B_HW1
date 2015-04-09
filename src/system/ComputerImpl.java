@@ -1,4 +1,4 @@
-package computer;
+package system;
 
 import java.io.Serializable;
 import java.rmi.registry.LocateRegistry;
