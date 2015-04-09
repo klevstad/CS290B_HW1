@@ -2,7 +2,7 @@
 
 Compile the project: ant
 
-Run the computer: ant -Dcomputer_ip=128.111.43.22 runComputer
+Run the computer: ant runComputer
 
 Run the TSP Client: ant -Dcomputer_ip=128.111.43.22  runTSPClient
 

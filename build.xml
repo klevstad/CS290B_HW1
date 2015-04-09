@@ -54,7 +54,6 @@
 	<target name="runComputer" description="run computer">
 		<java jar="${dist}/computer.jar" fork="true">
 			<jvmarg value="-Djava.security.policy=policy.txt"/>
-			<jvmarg value="-Djava.rmi.server.hostname=${computer_ip}"/>
 		</java>
 	</target>
 
