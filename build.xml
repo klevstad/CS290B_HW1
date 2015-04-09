@@ -54,20 +54,21 @@
 	<target name="runComputer" description="run computer">
 		<java jar="${dist}/computer.jar" fork="true">
 			<jvmarg value="-Djava.security.policy=policy.txt"/>
+			<jvmarg value="-Djava.rmi.server.hostname=${computer_ip}"/>
 		</java>
 	</target>
 
 	<target name="runMSClient" description="run mandelbrotset client">
 		<java jar="${dist}/clientMandelbrotSet.jar" fork="true">
  			<jvmarg value="-Djava.security.policy=policy.txt"/>
-			<arg value="localhost"/>
+			<arg value="${computer_ip}"/>
 		</java>
 	</target>
 
 	<target name="runTSPClient" description="run tsp client">
 		<java jar="${dist}/clientEuclideanTsp.jar" fork="true">
  			<jvmarg value="-Djava.security.policy=policy.txt"/>
-			<arg value="localhost"/>
+			<arg value="${computer_ip}"/>
 		</java>
 	</target>
 
