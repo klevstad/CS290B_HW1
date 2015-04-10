@@ -19,51 +19,23 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	}
 	
 	
-	/**
-	 * can only take in unvisited cities
-	 * @param cities List of all cities to visit
-	 * @param current the current city to move from
-	 * @param visited list of all cities that have been visited
-	 * @return the number that represents the closest city to move to
-	 */
-	public int findClosest(double[][] cities, int current, List<Integer> visited){
-		int closest=0;
-		double dist=1000;
-		for (int i = 0; i < cities.length; i++) {
-
-			if(i!= current){
-				if(getDistance(cities, current, i)<dist && !visited.contains(i)){
-					dist=getDistance(cities, current, i);
-					closest = i;
-				}
-			}
-
-		}
-
-		return closest;
-	}
-	/**
-	 * Finds the euclidian distance between two cities. 
-	 * @param cities list of all cities 
-	 * @param from The first city to find the distance from
-	 * @param to The second city to find the distance to
-	 * @return A double that is the distance between the cities. 
-	 */
-
 	
-	/**
-	 * Runs the Tsp. 
-	 * Starts at city 0 and uses a greedy algorithm to find the closes city to it. 
-	 * It then chooses that city as next point and repeats through the whole list of cities. 
-	 * It adds each visited city to path.
-	 * Returner is just to make the returning object the expected type for the client
-	 */
+
 
 	public List<Integer> execute() {
 		
 		return solve();
 		
 	}
+	
+	/**
+	 * Uses the list of cities, finds all permutations of those.
+	 * 
+	 * Then goes through every permutations and finds the distance of that path. 
+	 * It keeps the best path with smallest distance and when has gone through all
+	 *  it returns the best path
+	 * @return it returns the best path
+	 */
 	
 	 public  List<Integer> solve(){
 			int[] length = new int[CITIES.length];
@@ -94,16 +66,20 @@ public class TaskEuclideanTsp implements Task, Serializable {
 				
 				
 			}
-			//System.out.println("best distance "+best);
-			//System.out.println("best path ");
-			for (int i = 0; i < bestpath.size(); i++) {
-				//System.out.println(bestpath.get(i));
-				
-			}
+			
+			
 			return bestpath;
 			
 			
 		}
+	 /**
+	  * find the euclidian distance between two positions.
+	  * 
+	  * @param cities all cities
+	  * @param from the from city
+	  * @param to the to city
+	  * @return
+	  */
 	 
 	 double getDistance(double[][] cities, int from, int to){
 
@@ -111,6 +87,12 @@ public class TaskEuclideanTsp implements Task, Serializable {
 			return dist;
 
 		}
+	 /**
+	  *  Adds up the distances between cities in a path
+	  *  
+	  * @param current the path to calculate distance for
+	  * @return the total distance 
+	  */
 	 
 	 double findTotalDist(List<Integer> current){
 			double total= 0;
@@ -126,11 +108,32 @@ public class TaskEuclideanTsp implements Task, Serializable {
 			
 		}
 	 
+	 /**
+	  * This code is from here and out is from:
+	  * 
+	  * http://www.programcreek.com/2013/02/leetcode-permutations-java/
+	  * part: Java solution 2
+	  * 
+	  * It takes in a list and returns all possible permutations of positions in that list.
+	  *
+	  * 
+	  * @param num list to find all premutations on
+	  * @return a list containing all permutations
+	  */
+	 
 	 ArrayList<ArrayList<Integer>> permute(int[] num) {
 			ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 			permute(num, 0, result);
 			return result;
 		}
+	 
+	/**
+	 * recursively goes through to find all permutations
+	 * 
+	 * @param num
+	 * @param start
+	 * @param result
+	 */
 	 
 	 void permute(int[] num, int start, ArrayList<ArrayList<Integer>> result) {
 		 
