@@ -16,20 +16,32 @@ public class ComputerImpl implements api.Computer, Serializable{
 		super();
 	}
 
+
 	@Override
 	public <T> T execute(Task<T> task) {
 		return task.execute();
 	}
 	
+	/**
+	 * Main method for starting a computer instance. 
+	 * @param args Obsolete
+	 */
 	public static void main(String[] args) {
+		
+		// Creates a security manager
 	    if (System.getSecurityManager() == null) {
 	        System.setSecurityManager(new SecurityManager());
 	    }
 	    try {
 	        Computer computer = new ComputerImpl();
+	        
+	        // Creates a remote object for receiving incoming calls
 	        Computer stub = (Computer) UnicastRemoteObject.exportObject(computer, 0);
+	        
+	        // Creates a registry
 	        Registry registry = LocateRegistry.createRegistry( PORT );
 
+	        // Binds the service name and remote object with the registry
 	        registry.rebind(SERVICE_NAME, stub);
 	        System.out.println("ComputerImpl bound");
 	    } catch (Exception e) {

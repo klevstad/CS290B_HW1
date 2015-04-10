@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import api.Task;
 
-@SuppressWarnings({ "serial", "rawtypes" })
+/**
+ * @author Eirik
+ *
+ */
 public final class TaskMandelbrotSet implements Task, Serializable
 {
 	private double _lowerLeftX;
@@ -13,8 +16,18 @@ public final class TaskMandelbrotSet implements Task, Serializable
 	private int _nSquares;
 	private int _iterationLimit;
 	
+	
+	/**
+	 * Constructor. Creates the properties of the mandelbrot set task
+	 * @param lowerLeftX Lower left x coordinate of a square in the complex plane
+	 * @param lowerLeftY Lower left y coordinate of a square in the complex plane
+	 * @param edgeLength The length of a square in the complex plane
+	 * @param nSquares The number which divides the complex plane into N*N squars
+	 * @param iterationLimit Determines when the point of a region is in the Mandelbrot set
+	 */
 	public TaskMandelbrotSet(double lowerLeftX, double lowerLeftY, double edgeLength, int nSquares, int iterationLimit)
 	{
+
 		set_lowerLeftX(lowerLeftX);
 		set_lowerLeftY(lowerLeftY);
 		set_edgeLength(edgeLength);
@@ -22,14 +35,16 @@ public final class TaskMandelbrotSet implements Task, Serializable
 		set_iterationLimit(iterationLimit);
 	}
 
+
 	//@Override
 	public Integer[][] execute()
 	{
+		
 		Integer[][] count = new Integer[get_nSquares()][get_nSquares()];
 		double c_x = get_lowerLeftX(); // Get start x coordinate
 		double c_y = get_lowerLeftY(); // Get start y coordinate
 		double root_x = c_x; // Stores the x coordinate to begin at the same position for every row
-		double step = get_edgeLength() / get_nSquares(); // Ninjatriks.
+		double step = get_edgeLength() / get_nSquares(); // Computes the square step size for iterating over the complex plane
 		
 		for (int i = 0; i < get_nSquares(); i++)
 		{
@@ -46,6 +61,11 @@ public final class TaskMandelbrotSet implements Task, Serializable
 	}
 	
 	
+    /**
+     * @param c_x The complex x coordinate
+     * @param c_y The complex y coordinate
+     * @return int The iteration value of the point of the region in the Mandelbrot Set
+     */
     private int computeZK(double c_x, double c_y)
     {
         double x = 0;
