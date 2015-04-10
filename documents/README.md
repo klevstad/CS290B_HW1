@@ -1,6 +1,8 @@
 # CS290B_HW1
 
-Compile the project: ant
+Compile the project: ant compile
+
+Create the jars + javadoc: ant dist
 
 Run the computer: ant runComputer
 

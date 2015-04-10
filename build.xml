@@ -44,11 +44,12 @@
 		<copy todir="${client_file_codebase}/tasks/">
 			<fileset dir="${build}/tasks/"/>
 		</copy>  -->
+		<antcall target="javadoc"/>
 	</target>
 
-<!-- 	<target name="javadoc" description="create javadocs">
+	<target name="javadoc" description="create javadocs">
 		<javadoc packagenames="tasks.*,api.*" sourcepath="${src}" destdir="documents/javadoc"/>
-	</target> -->
+	</target>
 
 
 	<target name="runComputer" description="run computer">
@@ -76,5 +77,6 @@
 		<delete dir="${client_file_codebase}/tasks"/>
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
+		<delete dir="documents/javadoc"/>
 	</target>
 </project>
