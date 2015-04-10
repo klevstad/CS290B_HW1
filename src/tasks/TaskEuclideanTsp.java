@@ -11,12 +11,7 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	//just for testing
 	double[][] CITIES;
 
-	/**
-	 * 
-	 * Takes initialises the object with the problem as parameter
-	 * @param cities The problem
-	 */
-
+	
 	public TaskEuclideanTsp(double[][] cities) {
 		this.CITIES = cities;
 	}
@@ -53,12 +48,7 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	 * @return A double that is the distance between the cities. 
 	 */
 
-	double getDistance(double[][] cities, int from, int to){
-
-		double dist = Math.sqrt(Math.pow(cities[from][0]-cities[to][0],2) + Math.pow(cities[from][1]-cities[to][1],2));
-		return dist;
-
-	}
+	
 	/**
 	 * Runs the Tsp. 
 	 * Starts at city 0 and uses a greedy algorithm to find the closes city to it. 
@@ -68,24 +58,106 @@ public class TaskEuclideanTsp implements Task, Serializable {
 	 */
 
 	public List<Integer> execute() {
-		List<Integer> visited = new ArrayList<Integer>();
-		int [] path= new int[CITIES.length];
-
-		path[0]= 0;
-		visited.add(0);
-
-		for (int i = 1; i < CITIES.length; i++) {
-			path[i]= findClosest(CITIES, path[i-1],visited);
-			visited.add(path[i]);
-		}
 		
-		List<Integer> returner = new ArrayList<Integer>();
-		for (int i = 0; i < path.length; i++) {
-			returner.add(path[i]);
+		return solve();
+		
+	}
+	
+	 public  List<Integer> solve(){
+			int[] length = new int[CITIES.length];
+			for (int i = 0; i < CITIES.length; i++) {
+				length[i] = i;
+				
+			}
+			
+			ArrayList<ArrayList<Integer>> allPerm= permute(length);
+			//System.out.println(allPerm.size());
+			
+			double best= Double.MAX_VALUE;
+			List<Integer> bestpath= new ArrayList<Integer>();
+			//System.out.println(allPerm);
+			for (int i = 0; i < allPerm.size(); i++) {
+				
+				List<Integer> current = allPerm.get(i);
+				//System.out.println("trying "+current);
+				
+				
+				//System.out.print("  distance was "+findTotalDist(current));
+				
+				if(findTotalDist(current)<best){
+					best= findTotalDist(current);
+					bestpath = current;
+					//System.out.println("is now best");
+				}
+				
+				
+			}
+			//System.out.println("best distance "+best);
+			//System.out.println("best path ");
+			for (int i = 0; i < bestpath.size(); i++) {
+				//System.out.println(bestpath.get(i));
+				
+			}
+			return bestpath;
+			
 			
 		}
-		return returner;
-	}
+	 
+	 double getDistance(double[][] cities, int from, int to){
 
+			double dist = Math.sqrt(Math.pow(cities[from][0]-cities[to][0],2) + Math.pow(cities[from][1]-cities[to][1],2));
+			return dist;
+
+		}
+	 
+	 double findTotalDist(List<Integer> current){
+			double total= 0;
+			for (int i = 0; i < current.size(); i++) {
+				
+				total +=getDistance(CITIES, current.get(i), current.get((i+1)%current.size()));
+				
+			}
+			
+			return total;
+			
+			
+			
+		}
+	 
+	 ArrayList<ArrayList<Integer>> permute(int[] num) {
+			ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+			permute(num, 0, result);
+			return result;
+		}
+	 
+	 void permute(int[] num, int start, ArrayList<ArrayList<Integer>> result) {
+		 
+			if (start >= num.length) {
+				ArrayList<Integer> item = convertArrayToList(num);
+				result.add(item);
+			}
+		 
+			for (int j = start; j <= num.length - 1; j++) {
+				swap(num, start, j);
+				permute(num, start + 1, result);
+				swap(num, start, j);
+			}
+		}
+	 
+	 ArrayList<Integer> convertArrayToList(int[] num) {
+			ArrayList<Integer> item = new ArrayList<Integer>();
+			for (int h = 0; h < num.length; h++) {
+				item.add(num[h]);
+			}
+			return item;
+		}
+	 
+	 void swap(int[] a, int i, int j) {
+			int temp = a[i];
+			a[i] = a[j];
+			a[j] = temp;
+		}
+	 
+	
 
 }
